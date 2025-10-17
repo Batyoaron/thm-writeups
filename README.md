@@ -1,2 +1,5 @@
 # My tryhackme writeups
-<img src="https://tryhackme-badges.s3.amazonaws.com/batyo.png" alt="Your Image Badge" />
+
+Current writeups: 
+- <a href = "https://github.com/Batyoaron/thm-writeups/blob/main/gallery/writeup.md"> Gallery</a>
+
