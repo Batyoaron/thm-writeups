@@ -40,7 +40,7 @@ When sending a login request, i noticed that i get a suspicious response:
 ```
 {"status":"incorrect","last_qry":"SELECT * from users where username = 'admin' and password = md5('test') "}
 ```
-Login page maybe got some SQL injection vulnerability!
+This gave me an idea that the Login page maybe got some SQL injection vulnerability!
 Running sqlmap i can see it detected that the username paramater is vulnerable to an sql injection attack, now i could easily get the admin's passwords hash.
 After some time, sqlmap found the hash of the password
 ```
