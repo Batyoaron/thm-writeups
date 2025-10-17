@@ -1,10 +1,12 @@
 # Gallery THM writeup
 <a href = "https://tryhackme.com/room/gallery666"> https://tryhackme.com/room/gallery666 </a>
 
+
+
+<h3>1. Question: How many ports are open?</h3>  <br>
+Lets start with an nmap scan to get the number of open ports in the server!
 <br>
 
-1. Question: How many ports are open?
-lets start with an nmap scan to get the number of open ports in the server!
 ```
 $ nmap 10.10.4.212          
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-10-17 10:12 EDT
@@ -18,28 +20,31 @@ PORT     STATE SERVICE
 
 Nmap done: 1 IP address (1 host up) scanned in 1.17 seconds
 ```
+
 We have 3 open ports in the server, now we got the answer to the first question, **3**
 
+<hr>
 
-
-2. question: What's the name of the CMS?
+<h3>2. Question: What's the name of the CMS?</h3>
+<br>
 Opening the website on port 80, we get an apache ubuntu default page, this doesn't help much.. 
 but we noticed that there is another web server running on port 8080! Lets check it!
 
 Now the website provided us a login page and with the name of the CMS! **Simple Image Gallery**
 
+<hr>
 
+<h3>3. Question: What's the hash password of the admin user? </h3>
+When sending a login request, i noticed that we get a suspicious response:
 
-3. question: What's the hash password of the admin user?
-When sending a login request, i noticed that we get a suspicious response,
 ```
 {"status":"incorrect","last_qry":"SELECT * from users where username = 'admin' and password = md5('test') "}
 ```
-maybe got some SQL injection vulnerability!
+Login page maybe got some SQL injection vulnerability!
 Running sqlmap we can see it detected that the username paramater is vulnerable to an sql injection attack, now we could easily get the admin's passwords hash.
 After some time, sqlmap found the hash of the password
 ```
-sqlmap -r req.txt --dump
+$ sqlmap -r req.txt --dump
 ....
 +----------------------------------+
 | password                         |
@@ -48,16 +53,16 @@ sqlmap -r req.txt --dump
 +----------------------------------+
 ```
 
-Now i will continue to find some probable methods to gain a shell
-
-
-4. question: What's the user flag?
+<hr>
+<h3>4. Question: What's the user flag?</h3>
 To get the user flag, we have to gain a shell on the system.
-I searched for the CMS name and found a possible RCE exploit on exploit-db
-https://www.exploit-db.com/exploits/50214
+<br>
+I searched for the CMS name and found a possible RCE exploit on exploit-db:
+<a href = "https://www.exploit-db.com/exploits/50214"> https://www.exploit-db.com/exploits/50214 </a> <br>
 I downloaded this to my machine and i ran it. It successfully gave me a shell on the target system!
-
+<br><br>
 Only the user "mike" can read the user.txt, so we have to find a way to be mike!
+
 ```
 www-data@ip-10-10-191-82:/home/mike$ ls -l
 ls -l
@@ -75,14 +80,17 @@ he did a typo, and revealed his password in the bash history
 /var/backups/mike_home_backup/.bash_history:sudo -l
 ```
 
-now this allowed me to switch to mike's account with the password "b3stpassw0rdbr0xx" and read the user.txt!
+Now i could login to his account with mikes password: **"b3stpassw0rdbr0xx"** and read the user.txt!
 ```
 mike@ip-10-10-191-82:~$ cat user.txt
-THM{XXX}
+THM{af05cd30bfed67849befd546ef}
 ```
 
-5. Question: What's the root flag?
+<hr>
+
+<h3>5. Question: What's the root flag?</h3>
 I ran sudo -l and i noticed there is a program that i can run as root without password
+
 ```
 mike@ip-10-10-191-82:/opt$ sudo -l
 Matching Defaults entries for mike on ip-10-10-191-82:
@@ -91,7 +99,7 @@ Matching Defaults entries for mike on ip-10-10-191-82:
 User mike may run the following commands on ip-10-10-191-82:
     (root) NOPASSWD: /bin/bash /opt/rootkit.sh
 ```
-
+<br><br>
 What's inside of it?
 ```
 mike@ip-10-10-191-82:/opt$ cat rootkit.sh
@@ -113,6 +121,7 @@ case $ans in
         exit;;
 esac
 ```
-Aha, so if i run it as root, and write read in the input box it will open a nano UI as root!
+Aha, so if i run it as root, and write "read" in the input box (which will the sh script provide) it will open a nano UI as root!<br>
 So basically if you have nano run as root, you can read any file on the system, and if we go with the /root/root.txt
 it will paste the root flag in to the nano editor
+<img src = "rootflag.png">
