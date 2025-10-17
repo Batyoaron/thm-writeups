@@ -1,4 +1,9 @@
-1. question: How many ports are open?
+# Gallery THM writeup
+<a href = "https://tryhackme.com/room/gallery666"> https://tryhackme.com/room/gallery666 </a>
+
+<br>
+
+1. Question: How many ports are open?
 lets start with an nmap scan to get the number of open ports in the server!
 ```
 $ nmap 10.10.4.212          
