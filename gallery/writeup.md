@@ -124,4 +124,5 @@ esac
 Aha, so if i run it as root, and write "read" in the input box (which will the sh script provide) it will open a nano UI as root!<br>
 So basically if you have nano run as root, you can read any file on the system, and if we go with the /root/root.txt
 it will paste the root flag in to the nano editor
+<br>
 <img src = "rootflag.png">
