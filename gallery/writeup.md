@@ -4,7 +4,7 @@
 
 
 <h3>1. Question: How many ports are open?</h3>  <br>
-Lets start with an nmap scan to get the number of open ports in the server!
+Lets start with an nmap scan to get the number of open ports and also we may get a valueable port thats open in the server!
 <br>
 
 ```
@@ -89,7 +89,7 @@ THM{af05cd30bfed67849befd546ef}
 <hr>
 
 <h3>5. Question: What's the root flag?</h3>
-I ran sudo -l and i noticed there is a program that i can run as root without password
+I ran "sudo -l" and i noticed there is a program that i can run as root without password
 
 ```
 mike@ip-10-10-191-82:/opt$ sudo -l
@@ -100,7 +100,7 @@ User mike may run the following commands on ip-10-10-191-82:
     (root) NOPASSWD: /bin/bash /opt/rootkit.sh
 ```
 <br><br>
-What's inside of it?
+What's inside of opt/rootkit.sh?
 ```
 mike@ip-10-10-191-82:/opt$ cat rootkit.sh
 #!/bin/bash
@@ -124,5 +124,10 @@ esac
 Aha, so if i run it as root, and write "read" in the input box (which will the sh script provide) it will open a nano UI as root!<br>
 So basically if you have nano run as root, you can read any file on the system, and if we go with the /root/root.txt
 it will paste the root flag in to the nano editor
+<br>
+<br>
+(CTRL + k)
+<br>
+<img src = "insert.png">
 <br>
 <img src = "rootflag.png">
