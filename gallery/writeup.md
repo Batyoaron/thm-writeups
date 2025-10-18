@@ -134,15 +134,10 @@ case $ans in
 esac
 ```
 Aha, so if i run it as root, and write "read" in the input box (which will the sh script provide) it will open a nano UI as root!<br>
-So basically if you have nano run as root, you can read any file on the system, and if i go with the /root/root.txt
-it will paste the root flag in to the nano editor
+So basically if you have nano run as root, you can do anything, because nano lets you to execute system commands.
 <br>
 <br>
-(CTRL + k)
+So press CTRL + R and then CTRL + X in nano's UI, this will allow us to execute programs, as root because nano is run as root
+<img src = ""> 
 <br>
-<img src = "insert.png">
-<br>
-<img src = "rootflag.png">
-<br>
-<hr> 
-*Ujra: ha van nano root, CTRL + R majd CTRL + X ad engedélyt parancsok futtatására, megpróbáln netcatos módszert, ha nem jó, /root/.ssh/*
+
