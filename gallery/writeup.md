@@ -97,7 +97,8 @@ Now i could login to mike's account with the found password: **"b3stpassw0rdbr0x
 mike@ip-10-10-191-82:~$ cat user.txt
 THM{af05cd30bfed67849befd546ef}
 ```
-
+<br>
+Switch from netcat to ssh: <a href = "https://github.com/Batyoaron/thm-writeups/blob/main/help/ncat2ssh.md"> https://github.com/Batyoaron/thm-writeups/blob/main/help/ncat2ssh.md </a>
 <hr>
 
 <h3>5. Question: What's the root flag?</h3>
