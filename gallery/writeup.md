@@ -92,7 +92,7 @@ he forgot to hit enter, and revealed his password in the bash history file:
 /var/backups/mike_home_backup/.bash_history:sudo -l
 ```
 
-Now i could login to his account with mikes password: **"b3stpassw0rdbr0xx"** and read the user.txt!
+Now i could login to mike's account with the found password: **"b3stpassw0rdbr0xx"** and read the user.txt!
 ```
 mike@ip-10-10-191-82:~$ cat user.txt
 THM{af05cd30bfed67849befd546ef}
