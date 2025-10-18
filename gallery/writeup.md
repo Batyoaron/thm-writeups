@@ -143,3 +143,6 @@ it will paste the root flag in to the nano editor
 <img src = "insert.png">
 <br>
 <img src = "rootflag.png">
+<br>
+<hr> 
+*Ujra: ha van nano root, CTRL + K majd CTRL + X ad engedélyt parancsok futtatására, megpróbáln netcatos módszert, ha nem jó, /root/.ssh/*
