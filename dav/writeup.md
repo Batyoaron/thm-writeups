@@ -24,7 +24,7 @@ webdav                  [Status: 401, Size: 460, Words: 42, Lines: 15, Duration:
 
 Ffuf found a login page<br>
 <img src = "login.png">
-After a little google searching, Webdavs default credentials are: **wampp:xampp**<br>
+After a little <a href= "http://xforeveryman.blogspot.com/2012/01/helper-webdav-xampp-173-default.html">google searching</a>, Webdavs default credentials are: **wampp:xampp**<br>
 Lets try to login with this Password and Username<br>
 
 Logged in successfully! Its a filesystem:
