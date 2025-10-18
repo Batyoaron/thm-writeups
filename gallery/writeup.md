@@ -85,7 +85,7 @@ drwx------ 2 mike mike 4096 May 24  2021 images
 ```
 
 I downloaded linpeas, and ran it. While i was checking the output i noticed that when mike tried to use the command "sudo -l"
-he did a typo, and revealed his password in the bash history
+he did a typo(or forgot to hit enter), and revealed his password in the bash history
 ```
 ╔══════════╣ Searching passwords in history files
 /var/backups/mike_home_backup/.bash_history:sudo -lb3stpassw0rdbr0xx
