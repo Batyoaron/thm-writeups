@@ -64,7 +64,7 @@ The exploit uploaded a file to the server, which contained a ?cmd= paramter<br>
 
 Run netcat in listener mode, so the remote host could connect to my Kali:<br>
 ```
-ncat -nlvp 8001
+$ ncat -nlvp 8001
 ```
 
 I pasted my netcat script in the cmd parameter and i successfully got a more stable netcat reverse shell!
