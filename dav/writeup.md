@@ -1,4 +1,4 @@
-1. Task: user.txt
+<h3>1. Task: user.txt</h3>
 
 Lets start with the usual nmap scans!
 
@@ -61,7 +61,7 @@ www-data@ubuntu:/home/merlin$ cat user.txt
 ```
 
 <hr>
-2. Task: root flag
+<h3> 2. Task: root flag </h3>
 
 Running the command "sudo -l" shows us that we can run cat as root without Password
 ```
