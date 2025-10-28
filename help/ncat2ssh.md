@@ -12,11 +12,11 @@ $ cat thm_id_rsa.pub
 
 ```
 user@hostname:~$ mkdir -p ~/.ssh
-mike@ip-10-10-31-139:~$ echo "
+user@hostname:~$ echo "
 echo "
 > KEY " >> ~/.ssh/authorized_keys
-mike@ip-10-10-31-139:~$ chmod 700 ~/.ssh
-mike@ip-10-10-31-139:~$ chmod 600 ~/.ssh/authorized_keys
+user@hostname:~$ chmod 700 ~/.ssh
+user@hostname:~$ chmod 600 ~/.ssh/authorized_keys
 ```
 
 <h2>3. step: Attacker pc </h2>
