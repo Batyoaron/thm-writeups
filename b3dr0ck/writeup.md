@@ -102,7 +102,7 @@ Okay, i can use this key and certificate via openssl like this(guessing port 543
 ```
 openssl s_client -connect 10.10.246.196:54321 -key id_rsa -cert certificate 
 ```
-And after connection, i was able to get Barney's password:
+And after connecting, i was able to get Barney's password:
 ```
 Welcome: 'Barney Rubble' is authorized.
 b3dr0ck> 
@@ -125,7 +125,7 @@ THM{f05780f08f0eb1de65023069d0e4c90c}
 ```
 <hr>
 <h2> Question 2: Fred's password</h2>
-Following the tasks, i have to get access to freds account, and from fred's account, to root!
+Following the tasks, i have to get access to Fred's account, and from Fred's account, to root!
 
 Executing sudo -l command, returned that i can run certutil as root without password:
 ```
