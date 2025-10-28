@@ -173,7 +173,7 @@ And typing help again, it will show freds account password:
 b3dr0ck> help
 Password hint: **YabbaDabbaD0000!** (user = 'fred')
 ```
-We got Fred's account password, and also the answer to question 2!
+I got Fred's account password, and also the answer to question 2!
 ```
 $ ssh fred@10.10.246.196
 fred@10.10.246.196's password: 
@@ -212,7 +212,7 @@ Trying with CyberChef, i decoded from base32 to text, but the output looks like 
 <br>
 Its probably double, or triple encoded by base64/32
 <br><br>
-After trying for a while, it turns out we can decode it two times with base32 and once with base64, this finally gave me an MD5 hash<br>
+After trying for a while, it turns out I can decode it two times with base32 and once with base64, this finally gave me an MD5 hash<br>
 ```Base32 -> Base32 -> Base64 -> MD5```
 <img src = "cyberchef2.png">
 <br><br>
