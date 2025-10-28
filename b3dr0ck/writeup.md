@@ -173,9 +173,9 @@ Welcome: 'fred' is authorized.
 And typing help again, it will show freds account password:
 ```
 b3dr0ck> help
-Password hint: **YabbaDabbaD0000!** (user = 'fred')
+Password hint: YabbaDabbaD0000! (user = 'fred')
 ```
-I got Fred's account password, and also the answer to question 2!
+I got Fred's account password, and also the answer to question 2! **YabbaDabbaD0000!**
 ```
 $ ssh fred@10.10.246.196
 fred@10.10.246.196's password: 
