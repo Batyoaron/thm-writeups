@@ -26,7 +26,7 @@ PORT     STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 1.00 seconds
 ```
 
-Trying Port 9009 in broweser, it returned 
+Trying Port 9009 in browser, it returned 
 
 ```Unsupported or unrecognized SSL message```
 
