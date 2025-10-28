@@ -1,4 +1,5 @@
-
+# b3dr0ck THM writeup
+<a href = "https://tryhackme.com/room/b3dr0ck"> https://tryhackme.com/room/b3dr0ck </a>
 
 <hr>
 <h2> Question 1: flag 1</h2>
