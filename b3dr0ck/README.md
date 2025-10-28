@@ -1,3 +1,5 @@
+
+
 <hr>
 <h2> Question 1: flag 1</h2>
 I already got some hints from the details in the tryhackme page<br>
@@ -219,7 +221,7 @@ After trying for a while, it turns out I can decode it two times with base32 and
 Lets try cracking the MD5 hash with CrackStation!
 <img src = "crackstation.png">
 <br>
-Successful! Lets hope this is the root password
+Success! Lets hope this is the root password
 
 ```
 fred@ip-10-10-246-196:~$ su - root
