@@ -1,4 +1,5 @@
-
+# Smol THM writeup
+<a href = "https://tryhackme.com/room/smol"> https://tryhackme.com/room/smol </a>
 
 <hr>
 <h2> Question 1: user flag </h2>
