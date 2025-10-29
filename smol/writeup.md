@@ -58,7 +58,7 @@ define( 'DB_PASSWORD', 'kbLSF2Vop#lw3rjDZ629*Z%G' );
 
 <br>
 
-<img src = "wp-adim1.png"><br>
+<img src = "wp-admin1.png"><br>
 
 And it worked!
 <br>
